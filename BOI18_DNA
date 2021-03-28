@@ -1,0 +1,58 @@
+
+#include<bits/stdc++.h>
+/**
+     ||||||||||       |||||     |||||    ||||||||||
+    |||||||||||||     |||||     |||||  |||||
+   ||||     ||||||    |||||     |||||  |||||
+  |||||||||||||||||   |||||||||||||||    ||||||||||
+ |||||||||||||||||||  |||||||||||||||           |||||
+ |||||         |||||  |||||     |||||           |||||
+ |||||         |||||  |||||     |||||    ||||||||||
+AHMED;HASSAN;SAEED;
+*/
+using namespace std;
+
+int main() {
+    /**
+    freopen("input-pebble-dee6.txt","r",stdin);
+    freopen("out.txt","w",stdout);*/
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);      cout.tie(0);
+
+    int n,k,r;
+    cin>>n>>k>>r;
+    vector<int>occ(k),neded(k);
+    vector<int>dna(n);
+    for(int i=0;i<n;i++)
+        cin>>dna[i];
+
+    for(int i=0;i<r;i++){
+        int x,y;
+        cin>>x>>y;
+        neded[x]=y;
+    }
+
+    int l=0;
+    int ans=INT_MAX;
+    int ttl=0;
+
+    for(int i=0;i<n;i++){
+        occ[dna[i]]++;
+        ttl+=(occ[dna[i]]==neded[dna[i]]);
+        while(occ[dna[l]]-1>=neded[dna[l]]){
+            occ[dna[l]]--;
+            l++;
+        }
+        if(ttl==r)
+            ans=min(ans,i-l+1);
+       /// cout<<ttl<<'\n';
+
+    }
+    if(ans!=INT_MAX)
+        cout<<ans<<'\n';
+    else
+        cout<<"impossible"<<'\n';
+
+
+	return 0;
+}
